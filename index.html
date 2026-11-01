@@ -60,6 +60,11 @@ header{display:flex;align-items:center;justify-content:space-between;margin-bott
 .stat .v{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;margin-top:4px}
 .calc{margin-top:14px}
 .calc h2{margin:0 0 12px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--o)}
+.hours-total{text-align:center;padding:14px 10px 16px;margin-bottom:12px;border-radius:18px;border:1px solid var(--o-dim);background:radial-gradient(100% 120% at 50% 0%,rgba(255,122,26,.16),rgba(255,122,26,.02) 70%),#0a0705;box-shadow:inset 0 0 20px rgba(255,122,26,.08)}
+.hours-total small{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--o2)}
+.hours-total .hbig{font-family:'JetBrains Mono',monospace;font-size:38px;font-weight:700;color:var(--o2);text-shadow:0 0 10px rgba(255,140,40,.7),0 0 26px rgba(255,122,26,.4);line-height:1.15;margin-top:2px}
+.hours-total .hbig em{font-style:normal;font-size:20px;margin-left:4px;color:var(--o)}
+.hours-total .hsub{font-size:12px;color:var(--mut);margin-top:2px}
 .eq{display:flex;align-items:center;justify-content:space-between;gap:8px;font-family:'JetBrains Mono',monospace}
 .eq .box{flex:1;text-align:center;background:#0a0806;border:1px solid var(--line);border-radius:14px;padding:10px 4px}
 .eq .box small{display:block;font-family:'Space Grotesk';font-size:9px;letter-spacing:.14em;color:var(--mut);text-transform:uppercase;margin-bottom:4px}
@@ -124,6 +129,11 @@ header{display:flex;align-items:center;justify-content:space-between;margin-bott
 
   <section class="card calc">
     <h2>Calculator · this month</h2>
+    <div class="hours-total">
+      <small>Total hours</small>
+      <div class="hbig"><span id="tHours">0</span><em>h</em></div>
+      <div class="hsub" id="tSub">0 shifts logged</div>
+    </div>
     <div class="eq">
       <div class="box"><small>Hours</small><b id="cHours">0</b></div>
       <div class="op">×</div>
@@ -201,6 +211,8 @@ function render(){
   document.getElementById('shifts').textContent = shifts;
   document.getElementById('avg').textContent = (shifts? fmtH(total/shifts):0) + ' h';
   document.getElementById('cHours').textContent = fmtH(total);
+  document.getElementById('tHours').textContent = fmtH(total);
+  document.getElementById('tSub').textContent = `${shifts} shift${shifts===1?'':'s'} logged in ${MONTHS[m]}`;
   document.getElementById('cTotal').textContent = eur(total*RATE);
 }
 
